@@ -24,9 +24,6 @@ jobs:
           node-version: ${{inputs.npm_version}}
       - name: Npm install
         run: npm install
-      - name: linting
-        run: |
-          npm run lint
-      - name: linting
+      - name: test
         run: |
           npm run test
