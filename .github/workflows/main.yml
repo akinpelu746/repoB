@@ -1,0 +1,33 @@
+name: test-npm
+
+on:
+  workflow_call:
+    inputs:
+      npm_version:
+        description: 'Npm version to use'
+        default: '7.0.0'
+        required: false
+        type: string
+jobs:
+
+
+  pre-build-validation:
+    runs-on:  ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          path: source-code
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{inputs.npm_version}}
+      - name: Npm install
+        run: npm install
+      - name: linting
+        run: |
+          npm run lint
+      - name: linting
+        run: |
+          npm run test
