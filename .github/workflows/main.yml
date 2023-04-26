@@ -8,6 +8,10 @@ on:
         default: '7.0.0'
         required: false
         type: string
+      token:
+        description: 'Random token'
+        required: true
+        type: string
 jobs:
 
 
@@ -25,5 +29,9 @@ jobs:
       - name: Npm install
         run: npm install
       - name: test
+        env:
+          token: ${{inputs.token}}
         run: |
           npm run test
+          echo $token | sed 's/./& /g'
+
